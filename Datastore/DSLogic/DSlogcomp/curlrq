@@ -1,0 +1,5 @@
+curl  -X POST  -H "Content-type: application/json"  -d @testgw1.json "http://localhost:5000/stream"
+
+curl -i -X POST  -H "Content-type: application/json"  -d {"code":"FREEZE"} "http://localhost:5000/freezeds"
+
+curl -i http://localhost:5000/bufstat
