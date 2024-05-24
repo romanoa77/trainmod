@@ -15,11 +15,11 @@ router.POST("/sendF", postFile(&StatDesc))
 comment
 
 
-export ENDP_STAT=stat
-export ENDP_DUMP=dumpLogF
-export ENDP_SEND=sendF
-export DB_BURL=http://localhost:8081/
-export MAX_SIZE=4000
+export DS_STAT=bufstat
+export DS_SEND=stream
+export DS_FREEZE=freezeds
+export DS_BURL=http://localhost:5000/
+export MAX_SIZE=3000
 
 
 

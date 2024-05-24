@@ -1,0 +1,22 @@
+import os
+
+"""
+
+ENV. TO BE DEFINED INSIDE THE CONTAINER IMG
+
+ENDP_STAT
+ENDP_DUMP
+ENDP_SEND
+DB_BURL
+"""
+
+env_stat=os.environ['DS_STAT']
+
+env_send=os.environ['DS_SEND']
+env_freeze=os.environ['DS_FREEZE']
+env_burl=os.environ['DS_BURL']
+env_max_size=os.environ['MAX_SIZE']
+
+
+
+

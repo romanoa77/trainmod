@@ -1,4 +1,4 @@
-from flask import Flask, render_template,Response,request
+from flask import Flask, render_template,Response,request,make_response
 from flask import jsonify
 
 import sys
@@ -46,7 +46,8 @@ def pushStream():
 
       data=request.data
 
-      #print(data,file=sys.stderr)
+      #print('Incoming data',file=sys.stderr)
+      #print(request.data,file=sys.stderr)
 
     
 
@@ -70,10 +71,11 @@ def freezeApp():
    read_size=buffer['buff_size']
 
    if(AppStatus.isFreeze(read_size)):
-      appresp=buffer
+      appresp=make_response(buffer,'201')   
+
       AppStatus.freezeBuf()
    else:
-       appresp=Response("Waiting for more incoming data.",status=100,mimetype='text/plain')   
+       appresp=Response("Waiting for more incoming data.",status=200,mimetype='text/plain')   
       
 
    return appresp
