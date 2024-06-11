@@ -10,4 +10,4 @@ export LOGROOT=log/
 export LOGSTREAM=LogStream.json
 
 
-export SERVURL=localhost:8081
+export SERVURL=:8080

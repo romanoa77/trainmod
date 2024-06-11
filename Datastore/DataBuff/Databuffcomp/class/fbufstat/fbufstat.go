@@ -15,13 +15,14 @@ func New(nf int, bsize int) Bufstat {
 
 }
 
-func NewObj(buf []byte) Bufstat {
+func (Class *Bufstat) SetStat(buf []byte) {
 
 	var Ftable Bufstat
 
 	json.Unmarshal(buf, &Ftable)
 
-	return Ftable
+	Class.N_itm = Ftable.N_itm
+	Class.Buff_size = Ftable.Buff_size
 
 }
 
