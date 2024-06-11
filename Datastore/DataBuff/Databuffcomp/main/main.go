@@ -5,55 +5,59 @@ import (
 	"net/http"
 	"strconv"
 
+	"base.url/class/appmodel"
+	"base.url/class/appstr"
+	"base.url/class/envdef"
 	"base.url/class/fbufstat"
 	"base.url/class/fwrite"
 	"base.url/class/simplelogger"
 	"github.com/gin-gonic/gin"
 )
 
-/*
-type fstat struct {
-	Id        int    `json:"id"`
-	Timestamp string `json:"timestamp"`
-}
-
-*/
-
 type gw struct {
 	H_data []float64 `json:"h"`
 	T_data []float64 `json:"t"`
 }
 
-const baseadm = "adm/"
+/*Note: Simple I/O functions can print messages*/
+
+/*
+export ADMROOT = "adm/"
 const baseadmn = "StatDesc.json"
 
 const basedata = "data/"
 
 const baselog = "log/"
 const baselogn = "LogStream.json"
+*/
 
 func main() {
 
-	StatDesc := fbufstat.NewObj(fwrite.UnFtoStrm(baseadm, baseadmn))
+	StatDesc := fbufstat.NewObj(fwrite.UnFtoStrm(envdef.Baseadm, envdef.Baseadmn))
+	App := appstr.ConcrH{}
+
+	//gin.SetMode(gin.ReleaseMode)
 
 	router := gin.Default()
 
-	router.GET("/stat", getStat(&StatDesc))
-	router.GET("/dumpLogF", getLogF())
+	initapp(router, App, &StatDesc)
 
-	router.POST("/sendF", postFile(&StatDesc))
+	srv := &http.Server{Addr: ":8080", Handler: router}
 
-	router.Run("localhost:8081")
+	srv.ListenAndServe()
+
+	//router.GET("/dumpLogF", getLogF())
+
+	//router.POST("/sendF", postFile(&StatDesc))
+
+	router.Run(envdef.Basesrvurl)
 
 }
 
-func getStat(Table *fbufstat.Bufstat) gin.HandlerFunc {
+func initapp(SrvPt *gin.Engine, AppRts appmodel.AbstrApp, Buf *fbufstat.Bufstat) {
 
-	return func(ctx *gin.Context) {
-
-		ctx.IndentedJSON(http.StatusOK, Table)
-
-	}
+	SrvPt.GET("/stat", AppRts.GetStat(Buf))
+	//router.GET(, getStat(&StatDesc))
 
 }
 
@@ -67,7 +71,7 @@ func getLogF() gin.HandlerFunc {
 
 		var count int
 
-		bufst, count = fwrite.RFbyLine(baselog, baselogn)
+		bufst, count = fwrite.RFbyLine(envdef.Baselog, envdef.Strmlogn)
 
 		for i := 0; i < count; i++ {
 
@@ -104,16 +108,16 @@ func postFile(Stpt *fbufstat.Bufstat) gin.HandlerFunc {
 			return
 		}
 
-		fgwsize, _ = fwrite.PrintStToF(basedata, fgwname, 0666, Gwbuf)
+		fgwsize, _ = fwrite.PrintStToF(envdef.Basedata, fgwname, 0666, Gwbuf)
 
-		simplelogger.LogWriteFile(baselog, baselogn, count, fgwsize, fgwname)
+		simplelogger.LogWriteFile(envdef.Baselog, envdef.Strmlogn, count, fgwsize, fgwname)
 
 		//Updating app status
 		Stpt.UpdateCnt()
 		Stpt.UpdateSize(fgwsize)
 
 		buf = Stpt.GetJSONObj()
-		fwrite.PrintStrmToF(baseadm, baseadmn, 0666, buf)
+		fwrite.PrintStrmToF(envdef.Baseadm, envdef.Baseadmn, 0666, buf)
 
 		//Response
 		ctx.IndentedJSON(http.StatusCreated, "Written "+string(fgwname)+"for "+strconv.Itoa(fgwsize)+" bytes")
