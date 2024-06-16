@@ -19,6 +19,7 @@ func main() {
 	if initstat(envdef.Baseadm, envdef.Baseadmn, &StatDesc) != nil {
 
 		simplelogger.LogPanic("FATAL ERROR", "FS ERROR")
+
 	}
 
 	simplelogger.LogGreet("DB ready")

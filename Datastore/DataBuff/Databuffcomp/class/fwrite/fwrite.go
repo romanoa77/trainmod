@@ -72,7 +72,7 @@ func UnFtoStrm(dest string, filename string) ([]byte, error) {
 	var bt_arr []byte
 	var err error
 
-	bt_arr, _ = os.ReadFile(dest + filename)
+	bt_arr, err = os.ReadFile(dest + filename)
 
 	return bt_arr, err
 
