@@ -7,11 +7,12 @@ COPY class .
 WORKDIR /app/main
 COPY main .
 
+#Set the env. variable to use buildkit
 #export DOCKER_BUILDKIT=1
 
-RUN --mount=type=cache,target=/root/.cache go mod download
+RUN --mount=type=cache,target=/go/pkg/mod go mod download
 
-RUN go build -o /app/main/databuff
+RUN --mount=type=cache,target=/root/.cache/go-build go build -o /app/main/databuff
 
 FROM alpine:latest
 
@@ -31,6 +32,8 @@ WORKDIR /app
 RUN mkdir appdata
 RUN mkdir data
 COPY --from=build /app/main/databuff .
+
+EXPOSE 8080
 
 
 CMD  [ "./databuff" ]
