@@ -18,8 +18,8 @@ comment
 export ENDP_STAT=stat
 export ENDP_DUMP=dumpLogF
 export ENDP_SEND=sendF
-export DB_BURL=http://localhost:8081/
-export MAX_SIZE=4000
+export DB_BURL=http://localhost:8080/
+export MAX_SIZE=1000
 
 
 

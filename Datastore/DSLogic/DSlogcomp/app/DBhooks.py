@@ -1,5 +1,5 @@
-from DBCalls import RqCalls
-import Appfconf
+from . DBCalls import RqCalls
+
 
 """
 GIN CALLS
@@ -22,7 +22,7 @@ response={'code':req.status_code,'resp_msg':req.text}
 """
 
 class DBhook:
-
+    """
     def __init__(self,burl,stat,dump,send):
      self.Caller=RqCalls(burl)
 
@@ -30,7 +30,7 @@ class DBhook:
      self.status=stat  
      self.log_dump=dump
      self.send_data=send
-
+    """
     def getBufStat(self):
         
         buf_desc=self.Caller.getReq(self.status)
@@ -50,6 +50,17 @@ class DBhook:
         post_resp=self.Caller.postJson(self.send_data,data_struct)
 
         return post_resp
+    
+
+    def connect(self,burl,stat,dump,send):
+     self.Caller=RqCalls(burl)
+
+     self.serviceurl=burl
+     self.status=stat  
+     self.log_dump=dump
+     self.send_data=send
+    
+
     
 
 """

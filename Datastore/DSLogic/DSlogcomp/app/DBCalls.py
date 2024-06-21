@@ -19,6 +19,8 @@ Response struct
 response={'code':req.status_code,'resp_msg':req.json()}
 response={'code':req.status_code,'resp_msg':req.text}
 
+A data structure class could defined
+
 
 """
 
@@ -27,12 +29,13 @@ class RqCalls:
   def __init__(self,url):
     self.baseurl=url
     #self.max_time=1
+    self.RqHnd=requests.Session()
 
   def getReq(self,dest):
 
 
     
-    req=requests.get(self.baseurl+dest)
+    req=self.RqHnd.get(self.baseurl+dest)
     
 
     response={'code':req.status_code,'resp_msg':req.json()}
@@ -45,7 +48,7 @@ class RqCalls:
     input=data
     
 
-    req=requests.post(self.baseurl+dest,input)
+    req=self.RqHnd.post(self.baseurl+dest,input)
 
     response={'code':req.status_code,'resp_msg':req.text}
 

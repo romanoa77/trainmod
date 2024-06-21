@@ -1,5 +1,11 @@
 class AppDesc:
+    """
     def __init__(self,size):
+        self.buf_state='OPERATIONAL'
+        self.max_buf_size=int(size)
+    """
+    
+    def initDesc(self,size):
         self.buf_state='OPERATIONAL'
         self.max_buf_size=int(size)
 
