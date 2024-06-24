@@ -9,13 +9,16 @@ from .. import DBConn
 def freezeApp():
    
    buffer=statview.getBufStat()
+   
 
    read_size=buffer['buff_size']
 
    if(AppStatus.isFreeze(read_size)):
+      data=request.data
+      DBConn.postDsc(data)
       appresp=make_response(buffer,'201')   
 
-      AppStatus.freezeBuf()
+      
    else:
        appresp=Response("Waiting for more incoming data.",status=200,mimetype='text/plain')   
       

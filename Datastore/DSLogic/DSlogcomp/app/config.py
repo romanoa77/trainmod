@@ -9,9 +9,13 @@ ENDP_STAT
 ENDP_DUMP
 ENDP_SEND
 DB_BURL
+ENDP_DESC
+ENDP_UPD_DESC
 """
 class Config:
    env_stat=os.environ['ENDP_STAT']
+   env_desc=os.environ['ENDP_DESC']
+   env_upd_desc=os.environ['ENDP_UPD_DESC']
    env_dump=os.environ['ENDP_DUMP']
    env_send=os.environ['ENDP_SEND']
    env_burl=os.environ['DB_BURL']

@@ -11,6 +11,7 @@ from .. import DBConn
 def index():
     
     output=DBConn.getBufStat()
+    output_desc=DBConn.getDSDsc()
 
      #print(output['resp_msg'],file=sys.stderr)
 
@@ -19,8 +20,10 @@ def index():
 
        appresp=render_template(
           'index.html',size=output['resp_msg']['buff_size']
-          ,state=AppStatus.getState(),
-          nitm=output['resp_msg']['n_itm'])
+          ,state=output_desc['resp_msg']['dstatus'],
+          nitm=output['resp_msg']['n_itm'],
+          user=output_desc['resp_msg']['user'],
+          token=output_desc['resp_msg']['token'])
     
     
     return appresp

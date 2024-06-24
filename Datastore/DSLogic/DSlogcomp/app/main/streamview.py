@@ -8,8 +8,13 @@ from .. import DBConn
 
 @main_bp.route('/stream',methods=['POST'])
 def pushStream():
+     
+     desc=DBConn.getDSDsc()
+     state=desc['resp_msg']['dstatus']
+
+     """"""
     
-     if(AppStatus.isOp()):
+     if(AppStatus.isOp(state)):
 
       data=request.data
 

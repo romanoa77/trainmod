@@ -5,6 +5,7 @@ import (
 
 	"base.url/class/appmodel"
 	"base.url/class/appstr"
+	"base.url/class/dsstat"
 	"base.url/class/envdef"
 	"base.url/class/fbufstat"
 	"base.url/class/fwrite"
@@ -14,9 +15,10 @@ import (
 
 func main() {
 
-	StatDesc := fbufstat.New(0, 0)
+	StatDesc := fbufstat.GetInst()
+	DSDesc := dsstat.GetInst()
 
-	if initstat(envdef.Baseadm, envdef.Baseadmn, &StatDesc) != nil {
+	if initstat(envdef.Baseadm, envdef.Baseadmn, StatDesc) != nil {
 
 		simplelogger.LogPanic("FATAL ERROR", "FS ERROR")
 
@@ -30,7 +32,7 @@ func main() {
 
 	router := gin.Default()
 
-	initapp(router, App, &StatDesc)
+	initapp(router, App, StatDesc, DSDesc)
 
 	srv := &http.Server{Addr: envdef.Basesrvurl, Handler: router}
 
@@ -52,10 +54,46 @@ func initstat(rtdir string, rtfname string, Buf *fbufstat.Bufstat) error {
 	return err
 }
 
-func initapp(SrvPt *gin.Engine, AppRts appmodel.AbstrApp, Buf *fbufstat.Bufstat) {
+func PostMid(Stpt *fbufstat.Bufstat) gin.HandlerFunc {
+
+	return func(ctx *gin.Context) {
+
+		ctx.Next()
+
+		var Statbuf fbufstat.Bufstat
+
+		size := Stpt.Buff_size
+		count := Stpt.N_itm
+
+		Statbuf.N_itm = count
+		Statbuf.Buff_size = size
+		_, _ = fwrite.AtmWrtJs(envdef.Baseadm, envdef.Baseadmn, Statbuf)
+
+	}
+}
+
+func PostWho(Desc *dsstat.DSstat) gin.HandlerFunc {
+
+	return func(ctx *gin.Context) {
+
+		var buf dsstat.Idt
+
+		ctx.BindJSON(&buf)
+
+		Desc.User = buf.User
+		Desc.Token = buf.Token
+
+		ctx.Next()
+
+	}
+}
+
+func initapp(SrvPt *gin.Engine, AppRts appmodel.AbstrApp, Buf *fbufstat.Bufstat, Desc *dsstat.DSstat) {
 
 	SrvPt.GET("/stat", AppRts.GetStat(Buf))
 	SrvPt.GET("/dumpLogF", AppRts.GetLogF())
-	SrvPt.POST("/sendF", AppRts.PostFile(Buf))
+	SrvPt.GET("/dstat", AppRts.GetDSdsc(Desc))
+	SrvPt.POST("/sendF", PostMid(Buf), AppRts.PostFile(Buf))
+	SrvPt.POST("/upddsc", PostWho(Desc), AppRts.PostDsc(Desc))
 
 }

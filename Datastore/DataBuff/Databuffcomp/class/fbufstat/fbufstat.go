@@ -1,18 +1,28 @@
 package fbufstat
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"sync"
+)
 
 type Bufstat struct {
 	N_itm     int `json:"n_itm"`
 	Buff_size int `json:"buff_size"`
 }
 
-func New(nf int, bsize int) Bufstat {
+var instance *Bufstat
+var once sync.Once
+var mu sync.Mutex
 
-	Ftable := Bufstat{nf, bsize}
+func GetInst() *Bufstat {
 
-	return Ftable
+	once.Do(func() {
 
+		instance = &Bufstat{0, 0}
+
+	})
+
+	return instance
 }
 
 func (Class *Bufstat) SetStat(buf []byte) {
@@ -34,7 +44,17 @@ func (Class Bufstat) GetObj() Bufstat {
 
 func (Class *Bufstat) UpdateCnt() {
 
+	mu.Lock()
 	Class.N_itm += 1
+	mu.Unlock()
+
+}
+
+func (Class *Bufstat) CancCnt() {
+
+	mu.Lock()
+	Class.N_itm -= 1
+	mu.Unlock()
 
 }
 
@@ -48,6 +68,16 @@ func (Class Bufstat) GetJSONObj() []byte {
 
 func (Class *Bufstat) UpdateSize(buf int) {
 
+	mu.Lock()
 	Class.Buff_size += buf
+	mu.Unlock()
+
+}
+
+func (Class *Bufstat) CancSize(buf int) {
+
+	mu.Lock()
+	Class.Buff_size -= buf
+	mu.Unlock()
 
 }

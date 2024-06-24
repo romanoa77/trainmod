@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"base.url/class/dsstat"
 	"base.url/class/envdef"
 	"base.url/class/fbufstat"
 	"base.url/class/fwrite"
@@ -17,9 +18,20 @@ type gw struct {
 	H_data []float64 `json:"h"`
 	T_data []float64 `json:"t"`
 }
+
 type ConcrH struct{}
 
 func (h ConcrH) GetStat(Table *fbufstat.Bufstat) gin.HandlerFunc {
+
+	return func(ctx *gin.Context) {
+
+		ctx.JSON(http.StatusOK, Table)
+
+	}
+
+}
+
+func (h ConcrH) GetDSdsc(Table *dsstat.DSstat) gin.HandlerFunc {
 
 	return func(ctx *gin.Context) {
 
@@ -71,14 +83,17 @@ func (h ConcrH) PostFile(Stpt *fbufstat.Bufstat) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 
 		var Gwbuf gw
+
 		var count int
+
 		var fgwsize int
 		var fgwname string
 
-		var err error
+		var err, errb error
 		var resp_code int
 		var resp any
 
+		Stpt.UpdateCnt()
 		count = Stpt.N_itm
 
 		fgwname = "strmgw" + strconv.Itoa(count) + ".json"
@@ -86,33 +101,25 @@ func (h ConcrH) PostFile(Stpt *fbufstat.Bufstat) gin.HandlerFunc {
 		// Call BindJSON to bind the received JSON to
 		// newAlbum.
 
-		ctx.BindJSON(&Gwbuf)
+		errb = ctx.BindJSON(&Gwbuf)
 
 		fgwsize, err = fwrite.AtmWrtJs(envdef.Basedata, fgwname, Gwbuf)
 
-		if err == nil {
+		if (err == nil) && (errb == nil) {
 
 			simplelogger.LogWriteFile(envdef.Baselog, envdef.Strmlogn, count, fgwsize, fgwname)
 
 			//Updating app status
-			Stpt.UpdateCnt()
+			//Stpt.UpdateCnt()
 			Stpt.UpdateSize(fgwsize)
 
-			_, err = fwrite.AtmWrtJs(envdef.Baseadm, envdef.Baseadmn, Stpt)
-
-			if err == nil {
-				resp_code = http.StatusCreated
-				resp = neterr.New("RES_CREATE", "Written "+string(fgwname)+"for "+strconv.Itoa(fgwsize)+" bytes")
-
-			} else {
-				resp_code = http.StatusInternalServerError
-				resp = neterr.New(neterr.CdErrIO, neterr.BodyFIO)
-
-			}
+			resp_code = http.StatusCreated
+			resp = neterr.New("RES_CREATE", "Written "+string(fgwname)+"for "+strconv.Itoa(fgwsize)+" bytes")
 
 		} else {
 			resp_code = http.StatusInternalServerError
 			resp = neterr.New(neterr.CdErrIO, neterr.BodyFIO)
+			Stpt.CancCnt()
 
 		}
 
@@ -122,4 +129,85 @@ func (h ConcrH) PostFile(Stpt *fbufstat.Bufstat) gin.HandlerFunc {
 
 }
 
-//
+func (h ConcrH) PostDsc(Table *dsstat.DSstat) gin.HandlerFunc {
+
+	return func(ctx *gin.Context) {
+
+		Table.SetToFrz()
+
+		resp_code := http.StatusCreated
+		resp := neterr.New("STAT_UPD", "Table updated")
+
+		ctx.JSON(resp_code, resp)
+
+	}
+}
+
+/*
+func (h ConcrH) PostFile(Stpt *fbufstat.Bufstat) gin.HandlerFunc {
+
+	return func(ctx *gin.Context) {
+
+		var Gwbuf gw
+		var Statbuf fbufstat.Bufstat
+		var count int
+		var size int
+		var fgwsize int
+		var fgwname string
+
+		var err, errb error
+		var resp_code int
+		var resp any
+
+		Stpt.UpdateCnt()
+		count = Stpt.N_itm
+
+		fgwname = "strmgw" + strconv.Itoa(count) + ".json"
+
+		// Call BindJSON to bind the received JSON to
+		// newAlbum.
+
+		errb = ctx.BindJSON(&Gwbuf)
+
+		fgwsize, err = fwrite.AtmWrtJs(envdef.Basedata, fgwname, Gwbuf)
+
+		if (err == nil) && (errb == nil) {
+
+			simplelogger.LogWriteFile(envdef.Baselog, envdef.Strmlogn, count, fgwsize, fgwname)
+
+			//Updating app status
+			//Stpt.UpdateCnt()
+			Stpt.UpdateSize(fgwsize)
+			size = Stpt.Buff_size
+			count = Stpt.N_itm
+
+			Statbuf.N_itm = count
+			Statbuf.Buff_size = size
+			_, err = fwrite.AtmWrtJs(envdef.Baseadm, envdef.Baseadmn, Statbuf)
+
+			if err == nil {
+				resp_code = http.StatusCreated
+				resp = neterr.New("RES_CREATE", "Written "+string(fgwname)+"for "+strconv.Itoa(fgwsize)+" bytes")
+
+			} else {
+				resp_code = http.StatusInternalServerError
+				resp = neterr.New(neterr.CdErrIO, neterr.BodyFIO)
+				Stpt.CancCnt()
+				Stpt.CancSize(fgwsize)
+
+			}
+
+		} else {
+			resp_code = http.StatusInternalServerError
+			resp = neterr.New(neterr.CdErrIO, neterr.BodyFIO)
+			Stpt.CancCnt()
+
+		}
+
+		ctx.JSON(resp_code, resp)
+
+	}
+
+}
+
+*/

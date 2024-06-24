@@ -42,6 +42,12 @@ class DBhook:
        log_cont=self.Caller.getReq(self.log_dump)
 
        return log_cont
+    
+    def getDSDsc(self):
+       
+       buf_desc=buf_desc=self.Caller.getReq(self.desc_stat)
+
+       return buf_desc
 
     def postDataStream(self,data_struct):
 
@@ -51,14 +57,26 @@ class DBhook:
 
         return post_resp
     
+    def postDsc(self,data_struct):
 
-    def connect(self,burl,stat,dump,send):
+
+        #postJson expects a dict rapresenting a json object
+        post_resp=self.Caller.postJson(self.updd_stat,data_struct)
+
+        return post_resp
+    
+
+    
+
+    def connect(self,burl,stat,dump,send,desc,upddesc):
      self.Caller=RqCalls(burl)
 
      self.serviceurl=burl
      self.status=stat  
      self.log_dump=dump
      self.send_data=send
+     self.desc_stat=desc
+     self.updd_stat=upddesc
     
 
     

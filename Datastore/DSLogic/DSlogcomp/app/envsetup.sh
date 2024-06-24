@@ -19,7 +19,10 @@ export ENDP_STAT=stat
 export ENDP_DUMP=dumpLogF
 export ENDP_SEND=sendF
 export DB_BURL=http://localhost:8080/
+export ENDP_DESC=dstat
+export ENDP_UPD_DESC=upddsc
 export MAX_SIZE=1000
+
 
 
 
