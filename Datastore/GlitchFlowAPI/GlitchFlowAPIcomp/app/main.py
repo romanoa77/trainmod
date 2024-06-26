@@ -9,7 +9,8 @@ import json
 
 
 class FrzMsg(BaseModel):
-    code: str
+    user: str
+    token:str
 
 
 class GWData(BaseModel):
@@ -33,9 +34,10 @@ async def get_ds_stats(request: Request):
 @app.post("/train")
 async def trainsign(request: Request,msg:FrzMsg):
     requests_client = request.app.requests_client
-    
+    buf={'user':msg.user,'token':msg.token}
+    buf=json.dumps(buf)
     response = await requests_client.post(Appfconf.env_burl+Appfconf.env_freeze,
-                                          data={"code":msg.code})
+                                          data=buf)
     
     
     
@@ -66,10 +68,14 @@ async def streamdat(request: Request,stream:GWData):
     requests_client = request.app.requests_client
     buf={'h':stream.h,'t':stream.t}
     buf=json.dumps(buf)
-    
-
-    
-
     response = await requests_client.post(Appfconf.env_burl+Appfconf.env_send,data=buf)
     
-    return buf
+    if(response.status_code==httpx.codes.CREATED):
+     output={"resp":'CREATED',"body":response.text}
+    else:
+     
+     output={"resp":'FROZEN',"body":response.text}
+    
+
+
+    return output

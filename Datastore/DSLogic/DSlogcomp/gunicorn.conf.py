@@ -49,7 +49,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 import os
 
 
-bind = '0.0.0.0:8080'
+bind = '0.0.0.0:5000'
 backlog = 2048
 
 #
@@ -96,15 +96,15 @@ backlog = 2048
 #       A positive integer. Generally set in the 1-5 seconds range.
 #
 
-workers = 2
-worker_class = 'gthread'
+workers = 5
+worker_class = 'sync'
 worker_connections = 1000
 timeout = 30
 keepalive = 2
 
 #  thread -  number of threads per workers 
 
-thread=2
+thread=1
 
 #
 #   spew - Install a trace function that spews every line of Python
@@ -183,7 +183,7 @@ tmp_upload_dir = None
 #       A string of "debug", "info", "warning", "error", "critical"
 #
 
-#logfile='/var/log'
+logfile='-'
 errorlog = '-'
 loglevel = 'info'
 accesslog = '-'

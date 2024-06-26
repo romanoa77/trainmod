@@ -1,40 +1,40 @@
-FROM alpine:latest
+# syntax=docker/dockerfile:1
+FROM python:3.8.10-alpine AS comp
+
+RUN python -m venv /opt/venv
+ENV PATH=/opt/venv/bin:$PATH
+
+COPY requirements.txt .
+RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt
+
+FROM python:3.8.10-alpine
 
 ### Env var and cmd line arguments####
 ARG srvd=/var/www
-ARG repo=https://github.com/romanoa77/repdepo
-ARG reponm=repdepo
 
-ENV PAYLOAD=test.py
-ENV PAYLOADNM=test
+ENV ENDP_STAT=stat
+ENV ENDP_DUMP=dumpLogF
+ENV ENDP_SEND=sendF
+ENV DB_BURL=http://localhost:8080/
+ENV ENDP_DESC=dstat
+ENV ENDP_UPD_DESC=upddsc
+ENV MAX_SIZE=1500
+
+
+
 
 ENV GREET="Hello from Gunicorn server!"
+ENV PATH=/opt/venv/bin:$PATH
 ######################################
 
-## webserverver filesystem
 RUN mkdir ${srvd}
-######################################
 
-RUN apk add  git &&apk cache clean
-
-RUN apk add  py3-flask   &&apk cache clean
-RUN apk add  py3-gunicorn   &&apk cache clean
-
-
-RUN git clone ${repo}
-
-
-
-ADD gunicorn.conf.py /etc
-ADD  init.py ${srvd}
-
-ADD ${reponm}/${PAYLOAD} ${srvd}
-
-ADD ${reponm}/templates ${srvd}
+COPY --from=comp /opt/venv /opt/venv
+COPY  gunicorn.conf.py /etc
+COPY app ${srvd}/app
 
 WORKDIR ${srvd}
 
 
 
-CMD [ "gunicorn", "-c","/etc/gunicorn.conf.py", "init:create_app()" ]
-
+CMD [ "gunicorn", "-c","/etc/gunicorn.conf.py", "app:create_app('default')" ]
