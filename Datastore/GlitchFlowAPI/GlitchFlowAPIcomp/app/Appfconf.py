@@ -15,6 +15,7 @@ env_stat=os.environ['DS_STAT']
 env_send=os.environ['DS_SEND']
 env_freeze=os.environ['DS_FREEZE']
 env_burl=os.environ['DS_BURL']
+env_clean=os.environ['DS_FLUSH']
 env_max_size=os.environ['MAX_SIZE']
 
 

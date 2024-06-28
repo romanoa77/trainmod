@@ -12,4 +12,5 @@ type AbstrApp interface {
 	PostFile(Stpt *fbufstat.Bufstat) gin.HandlerFunc
 	GetDSdsc(Table *dsstat.DSstat) gin.HandlerFunc
 	PostDsc(Table *dsstat.DSstat) gin.HandlerFunc
+	PostClean(Stpt *fbufstat.Bufstat, Table *dsstat.DSstat) gin.HandlerFunc
 }

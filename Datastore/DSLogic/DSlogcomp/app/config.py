@@ -20,6 +20,7 @@ class Config:
    env_send=os.environ['ENDP_SEND']
    env_burl=os.environ['DB_BURL']
    env_max_size=os.environ['MAX_SIZE']
+   env_flush=os.environ['ENDP_CLEAN']
 
    @staticmethod
    def init_app(app):

@@ -61,13 +61,20 @@ func PostMid(Stpt *fbufstat.Bufstat) gin.HandlerFunc {
 		ctx.Next()
 
 		var Statbuf fbufstat.Bufstat
+		var err error
 
 		size := Stpt.Buff_size
 		count := Stpt.N_itm
 
 		Statbuf.N_itm = count
 		Statbuf.Buff_size = size
-		_, _ = fwrite.AtmWrtJs(envdef.Baseadm, envdef.Baseadmn, Statbuf)
+		_, err = fwrite.AtmWrtJs(envdef.Baseadm, envdef.Baseadmn, Statbuf)
+
+		if err != nil {
+
+			simplelogger.LogPanic("FATAL ERROR", "FS ERROR")
+
+		}
 
 	}
 }
@@ -95,5 +102,6 @@ func initapp(SrvPt *gin.Engine, AppRts appmodel.AbstrApp, Buf *fbufstat.Bufstat,
 	SrvPt.GET("/dstat", AppRts.GetDSdsc(Desc))
 	SrvPt.POST("/sendF", PostMid(Buf), AppRts.PostFile(Buf))
 	SrvPt.POST("/upddsc", PostWho(Desc), AppRts.PostDsc(Desc))
+	SrvPt.POST("/cleanall", AppRts.PostClean(Buf, Desc))
 
 }

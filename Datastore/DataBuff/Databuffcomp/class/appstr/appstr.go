@@ -3,7 +3,9 @@ package appstr
 import (
 	"encoding/json"
 	"net/http"
+	"os"
 	"strconv"
+	"time"
 
 	"base.url/class/dsstat"
 	"base.url/class/envdef"
@@ -137,6 +139,72 @@ func (h ConcrH) PostDsc(Table *dsstat.DSstat) gin.HandlerFunc {
 
 		resp_code := http.StatusCreated
 		resp := neterr.New("STAT_UPD", "Table updated")
+
+		ctx.JSON(resp_code, resp)
+
+	}
+}
+
+func (h ConcrH) PostClean(Stpt *fbufstat.Bufstat, Table *dsstat.DSstat) gin.HandlerFunc {
+
+	return func(ctx *gin.Context) {
+
+		var buf fbufstat.Bufstat
+		var flag bool
+		var err error
+
+		var resp_code int
+		var resp any
+
+		flag = false
+
+		now := time.Now()
+
+		if os.Rename(envdef.Basedata, now.Format("Mon Jan 2 15:04")) != nil {
+
+			flag = true
+		}
+
+		if os.Mkdir(envdef.Datanm, os.ModePerm) != nil {
+			flag = true
+
+		}
+
+		_, err = os.Create(envdef.Baselog + envdef.Strmlogn)
+
+		if err != nil {
+
+			flag = true
+		}
+
+		Stpt.N_itm = 0
+		Stpt.Buff_size = 0
+
+		buf.N_itm = 0
+		buf.Buff_size = 0
+
+		Table.SetToOp()
+		Table.User = "databuf"
+		Table.Token = "databuf"
+
+		_, err = fwrite.AtmWrtJs(envdef.Baseadm, envdef.Baseadmn, buf)
+
+		if err != nil {
+
+			flag = true
+		}
+
+		if flag {
+
+			resp_code = http.StatusInternalServerError
+			resp = neterr.New(neterr.CdErrIO, neterr.BodyFIO)
+
+		} else {
+
+			resp_code = http.StatusCreated
+			resp = neterr.New("STAT_UPD", "Buffer cleaned")
+
+		}
 
 		ctx.JSON(resp_code, resp)
 

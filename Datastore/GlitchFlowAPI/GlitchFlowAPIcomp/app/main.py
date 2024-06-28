@@ -17,6 +17,11 @@ class GWData(BaseModel):
       h: List[float] 
       t: List[float]    
 
+class EndMsg(BaseModel):
+      msg: str
+          
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     app.requests_client = httpx.AsyncClient()
@@ -75,6 +80,24 @@ async def streamdat(request: Request,stream:GWData):
     else:
      
      output={"resp":'FROZEN',"body":response.text}
+    
+
+
+    return output
+
+
+@app.post("/cleanbuf")
+async def clean(request: Request,inp:EndMsg):
+    requests_client = request.app.requests_client
+    buf={'msg':inp.msg}
+    buf=json.dumps(buf)
+    response = await requests_client.post(Appfconf.env_burl+Appfconf.env_clean,data=buf)
+    
+    if(response.status_code==httpx.codes.CREATED):
+     output={"resp":'CLEANED',"body":response.text}
+    else:
+     
+     output={"resp":'FS ERR',"body":response.text}
     
 
 

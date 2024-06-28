@@ -65,10 +65,18 @@ class DBhook:
 
         return post_resp
     
+    def postFlush(self,data_struct):
+
+
+        #postJson expects a dict rapresenting a json object
+        post_resp=self.Caller.postJson(self.flush,data_struct)
+
+        return post_resp
+    
 
     
 
-    def connect(self,burl,stat,dump,send,desc,upddesc):
+    def connect(self,burl,stat,dump,send,desc,upddesc,clean):
      self.Caller=RqCalls(burl)
 
      self.serviceurl=burl
@@ -77,6 +85,7 @@ class DBhook:
      self.send_data=send
      self.desc_stat=desc
      self.updd_stat=upddesc
+     self.flush=clean
     
 
     

@@ -19,7 +19,8 @@ export DS_STAT=bufstat
 export DS_SEND=stream
 export DS_FREEZE=freezeds
 export DS_BURL=http://localhost:5000/
-export MAX_SIZE=1500
+export DS_FLUSH=flushbuf
+export MAX_SIZE=2000
 
 
 
