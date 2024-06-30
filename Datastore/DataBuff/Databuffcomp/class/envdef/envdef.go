@@ -14,6 +14,8 @@ const envlogstrm = "LOGSTREAM"
 
 const envres = "RESROOT"
 
+const envdtrt = "DTVOLROOT"
+
 // network
 const envserv = "SERVURL"
 
@@ -29,6 +31,8 @@ var Baselog = os.Getenv(envlog)
 var Strmlogn = os.Getenv(envlogstrm)
 
 var Baseres = os.Getenv(envres)
+
+var Basevoldt = os.Getenv(envdtrt)
 
 //network
 

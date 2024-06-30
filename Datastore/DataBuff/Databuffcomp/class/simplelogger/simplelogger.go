@@ -53,3 +53,24 @@ func LogGreet(greeter string) {
 	logger.Info().Msg(greeter)
 
 }
+
+func LogInf(dest string, filename string, info string) error {
+
+	file, err := os.OpenFile(
+		dest+filename,
+		os.O_APPEND|os.O_CREATE|os.O_WRONLY,
+		0666,
+	)
+	if err != nil {
+		return err
+	}
+
+	defer file.Close()
+
+	logger := zerolog.New(file).With().Timestamp().Logger()
+
+	logger.Info().Msg(info)
+
+	return err
+
+}

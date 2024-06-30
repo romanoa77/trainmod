@@ -19,13 +19,16 @@ FROM alpine:latest
 ENV ADMROOT=appdata/adm/
 ENV ADMFNM=StatDesc.json
 
-ENV DATAROOT=data/
+ENV DATAROOT=data/datavar/
+ENV DATANM=data/datavar
 
 ENV LOGROOT=appdata/log/
 ENV LOGSTREAM=LogStream.json
 
 
 ENV SERVURL=:8080
+
+ENV DTVOLROOT=data/
 
 
 WORKDIR /app

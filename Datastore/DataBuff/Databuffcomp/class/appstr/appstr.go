@@ -160,19 +160,24 @@ func (h ConcrH) PostClean(Stpt *fbufstat.Bufstat, Table *dsstat.DSstat) gin.Hand
 
 		now := time.Now()
 
-		if os.Rename(envdef.Basedata, now.Format("Mon Jan 2 15:04")) != nil {
+		if os.Rename(envdef.Basedata, envdef.Basevoldt+now.Format("Mon Jan 2 15:04")) != nil {
 
+			//simplelogger.LogInf(envdef.Baselog, "infolog", "errore nominazione")
 			flag = true
 		}
 
 		if os.Mkdir(envdef.Datanm, os.ModePerm) != nil {
 			flag = true
 
+			//simplelogger.LogInf(envdef.Baselog, "infolog", "errore creazione dir")
+
 		}
 
 		_, err = os.Create(envdef.Baselog + envdef.Strmlogn)
 
 		if err != nil {
+
+			//simplelogger.LogInf(envdef.Baselog, "infolog", "errore log")
 
 			flag = true
 		}
@@ -190,6 +195,8 @@ func (h ConcrH) PostClean(Stpt *fbufstat.Bufstat, Table *dsstat.DSstat) gin.Hand
 		_, err = fwrite.AtmWrtJs(envdef.Baseadm, envdef.Baseadmn, buf)
 
 		if err != nil {
+
+			//simplelogger.LogInf(envdef.Baselog, "infolog", "errore stato")
 
 			flag = true
 		}

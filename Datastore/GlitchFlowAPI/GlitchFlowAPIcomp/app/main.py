@@ -1,5 +1,5 @@
 import httpx
-import Appfconf
+from . import Appfconf
 from fastapi import FastAPI, Request
 from contextlib import asynccontextmanager
 from pydantic import BaseModel
