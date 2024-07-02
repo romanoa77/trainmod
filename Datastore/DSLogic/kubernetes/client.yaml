@@ -9,5 +9,5 @@ spec:
     command: 
      - /bin/sh
      - "-c"
-     - "sleep 400m"
+     - "sleep infinity"
     

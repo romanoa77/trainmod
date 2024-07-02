@@ -21,6 +21,11 @@ metadata:
   name: dslog-deploy
   labels:
     app: dslogic
+  annotations:
+   author: "Alessio Romano"
+   mail: "alessio.romano329@edu.unito.it"
+   descr: "Flask on gunicorn server app checking datastore state"
+   other: "undergrad thesis university of Turin"  
 spec:
   replicas: 1
   selector:
@@ -33,6 +38,10 @@ spec:
     spec:
       containers:
        - name: dslogic
-         image: romanoa77/dslogic:alpha.k8s.0
+         image: romanoa77/dslogic:alpha.k8s.0.1
          ports:
          - containerPort: 5000
+         resources:
+          requests:
+            cpu: "2" 
+            memory: "120Mi" 

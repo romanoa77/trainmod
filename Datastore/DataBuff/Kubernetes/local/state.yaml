@@ -18,11 +18,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: databuff
-  annotations:
-   author: "Alessio Romano"
-   mail: "alessio.romano329@edu.unito.it"
-   descr: "datastore  storing GW data written in go"
-   other: "undergrad thesis university of Turin"
 spec:
   serviceName: databuff
   replicas: 1
@@ -41,10 +36,6 @@ spec:
         ports:
         - containerPort: 8080
           name: ginport
-        resources:
-          requests:
-           cpu: "2" 
-           memory: "10Mi" 
         volumeMounts:
          - name: adata
            mountPath: /app/appdata
@@ -54,10 +45,10 @@ spec:
       volumes:
       - name: adata
         persistentVolumeClaim:
-         claimName: adml
+         claimName: adm
       - name: gdata  
         persistentVolumeClaim:
-          claimName: gwdatal 
+          claimName: gwdata 
 
   
       

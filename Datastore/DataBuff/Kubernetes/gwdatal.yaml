@@ -1,11 +1,14 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
- name: gwdata
+ name: gwdatal
 spec:
  accessModes: [ "ReadWriteMany" ]
- storageClassName: standard
+ storageClassName: longhorn
  resources:
   requests:
-   storage: 1M
- storageClassName: standard
+   storage: "50Mi"
+ 
+
+  
+ 

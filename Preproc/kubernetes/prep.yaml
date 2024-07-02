@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prep-dummy
+  labels:
+    app: prep-dummy
+  annotations:
+   author: "Alessio Romano"
+   mail: "alessio.romano329@edu.unito.it"
+   descr: "dummy"
+   other: "undergrad thesis university of Turin"  
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prep-dummy
+  template:
+    metadata:
+      labels:
+        app: prep-dummy
+    spec:
+      containers:
+       - name: prep-dummy
+         image: python:3.8-alpine
+         command: ["sleep","infinity"]
+         
+         
+         resources:
+          requests:
+            cpu: "1" 
+            memory: "50Mi" 
+         volumeMounts:
+         
+         - name: gdata 
+           mountPath: /opt  
+
+      volumes:
+      
+      - name: gdata  
+        persistentVolumeClaim:
+          claimName: gwdatal       

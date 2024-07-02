@@ -4,7 +4,7 @@ FROM python:3.8.10-slim-buster
 ENV DS_STAT=bufstat
 ENV DS_SEND=stream
 ENV DS_FREEZE=freezeds
-ENV DS_BURL=http://localhost:5000/
+ENV DS_BURL=http://dslogic.glitchflow.svc.cluster.local:5000/
 ENV DS_FLUSH=flushbuf
 ENV MAX_SIZE=2000
 

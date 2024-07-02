@@ -1,11 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
- name: adm
+ name: adml
 spec:
  accessModes: [ "ReadWriteOnce" ]
- storageClassName: standard
+ storageClassName: local-path
  resources:
   requests:
-   storage: 1M
- storageClassName: standard
+   storage: "1Mi"
+  
+ 
