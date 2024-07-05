@@ -13,6 +13,7 @@ type Bufstat struct {
 var instance *Bufstat
 var once sync.Once
 var mu sync.Mutex
+var nu sync.Mutex
 
 func GetInst() *Bufstat {
 
@@ -36,7 +37,7 @@ func (Class *Bufstat) SetStat(buf []byte) {
 
 }
 
-func (Class Bufstat) GetObj() Bufstat {
+func (Class *Bufstat) GetObj() *Bufstat {
 
 	return Class
 
@@ -78,6 +79,15 @@ func (Class *Bufstat) CancSize(buf int) {
 
 	mu.Lock()
 	Class.Buff_size -= buf
+	mu.Unlock()
+
+}
+
+func (Class *Bufstat) UpdateSt(bufs int) {
+
+	mu.Lock()
+	Class.N_itm += 1
+	Class.Buff_size += bufs
 	mu.Unlock()
 
 }
