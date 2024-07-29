@@ -1,7 +1,12 @@
 package main
 
 import (
+	"context"
 	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	"base.url/class/appmodel"
 	"base.url/class/appstr"
@@ -19,6 +24,7 @@ func main() {
 	DSDesc := dsstat.GetInst()
 
 	wrtch := make(chan fbufstat.Bufstat)
+	msgch := make(chan int)
 
 	if initstat(envdef.Baseadm, envdef.Baseadmn, StatDesc) != nil {
 
@@ -38,15 +44,42 @@ func main() {
 
 	srv := &http.Server{Addr: envdef.Basesrvurl, Handler: router}
 
-	go worker(wrtch)
+	go worker(wrtch, msgch)
 
-	srv.ListenAndServe()
+	go func() {
+		// service connections
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			simplelogger.LogPanic("FATAL ERROR", "NETWORK ERROR")
+		}
+	}()
 
-	close(wrtch)
+	quitch := make(chan os.Signal, 1)
+
+	signal.Notify(quitch, syscall.SIGINT, syscall.SIGTERM)
+	//main blocks until a signal is received
+	<-quitch
+
+	simplelogger.LogGreet("Init shutdown...")
+
+	ct, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	if err := srv.Shutdown(ct); err != nil {
+		simplelogger.LogPanic("FORCING SHUTDOWN!", "NETWORK ERROR")
+	}
+
+	// catching ct.Done(). timeout of 5 seconds.
+	simplelogger.LogGreet("Timeout of 5 seconds...")
+	<-ct.Done()
+
+	simplelogger.LogGreet("Server exiting.")
+	msgch <- 0
+	simplelogger.LogGreet("Timeout of 10 seconds...")
+	time.Sleep(10 * time.Second)
+	simplelogger.LogGreet("Databuff closing...")
 
 }
 
-func worker(Bch chan fbufstat.Bufstat) {
+func worker(Bch chan fbufstat.Bufstat, Mch chan int) {
 
 	var Buf fbufstat.Bufstat
 	var err error
@@ -64,6 +97,11 @@ func worker(Bch chan fbufstat.Bufstat) {
 				simplelogger.LogPanic("FATAL ERROR", "FS ERROR")
 
 			}
+
+		case <-Mch:
+
+			simplelogger.LogGreet("Main worker thread stopping...")
+			return
 
 		}
 
