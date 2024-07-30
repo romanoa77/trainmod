@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strconv"
 	"syscall"
 	"time"
 
@@ -20,10 +21,13 @@ import (
 
 func main() {
 
+	var nch int
 	StatDesc := fbufstat.GetInst()
 	DSDesc := dsstat.GetInst()
 
-	wrtch := make(chan fbufstat.Bufstat)
+	nch, _ = strconv.Atoi(envdef.Chlen)
+
+	wrtch := make(chan int, nch)
 	msgch := make(chan int)
 
 	if initstat(envdef.Baseadm, envdef.Baseadmn, StatDesc) != nil {
@@ -44,7 +48,7 @@ func main() {
 
 	srv := &http.Server{Addr: envdef.Basesrvurl, Handler: router}
 
-	go worker(wrtch, msgch)
+	go worker(wrtch, msgch, StatDesc)
 
 	go func() {
 		// service connections
@@ -79,18 +83,19 @@ func main() {
 
 }
 
-func worker(Bch chan fbufstat.Bufstat, Mch chan int) {
+func worker(Bch chan int, Mch chan int, Stpt *fbufstat.Bufstat) {
 
-	var Buf fbufstat.Bufstat
+	var buf int
 	var err error
 
 	for {
 
 		select {
 
-		case Buf = <-Bch:
+		case buf = <-Bch:
 
-			_, err = fwrite.PrintStToF(envdef.Baseadm, envdef.Baseadmn, 0666, Buf)
+			Stpt.UpdateSt(buf)
+			_, err = fwrite.AtmWrtJs(envdef.Baseadm, envdef.Baseadmn, Stpt)
 
 			if err != nil {
 
@@ -139,12 +144,12 @@ func PostWho(Desc *dsstat.DSstat) gin.HandlerFunc {
 	}
 }
 
-func initapp(SrvPt *gin.Engine, AppRts appmodel.AbstrApp, Buf *fbufstat.Bufstat, Desc *dsstat.DSstat, Chnl chan fbufstat.Bufstat) {
+func initapp(SrvPt *gin.Engine, AppRts appmodel.AbstrApp, Buf *fbufstat.Bufstat, Desc *dsstat.DSstat, Chnl chan int) {
 
 	SrvPt.GET("/stat", AppRts.GetStat(Buf))
 	SrvPt.GET("/dumpLogF", AppRts.GetLogF())
 	SrvPt.GET("/dstat", AppRts.GetDSdsc(Desc))
-	SrvPt.POST("/sendF", AppRts.PostFile(Buf, Chnl))
+	SrvPt.POST("/sendF", AppRts.PostFile(Chnl))
 	SrvPt.POST("/upddsc", PostWho(Desc), AppRts.PostDsc(Desc))
 	SrvPt.POST("/cleanall", AppRts.PostClean(Buf, Desc))
 

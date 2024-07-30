@@ -83,11 +83,18 @@ func (Class *Bufstat) CancSize(buf int) {
 
 }
 
-func (Class *Bufstat) UpdateSt(bufs int) {
+func (Class *Bufstat) UpdateStMux(bufs int) {
 
 	mu.Lock()
 	Class.N_itm += 1
 	Class.Buff_size += bufs
 	mu.Unlock()
+
+}
+
+func (Class *Bufstat) UpdateSt(bufs int) {
+
+	Class.N_itm += 1
+	Class.Buff_size += bufs
 
 }
