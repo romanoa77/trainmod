@@ -18,6 +18,7 @@ const envdtrt = "DTVOLROOT"
 
 // network
 const envserv = "SERVURL"
+const envch = "WCHSZ"
 
 //filesystem
 
@@ -37,3 +38,4 @@ var Basevoldt = os.Getenv(envdtrt)
 //network
 
 var Basesrvurl = os.Getenv(envserv)
+var Chlen = os.Getenv(envch)

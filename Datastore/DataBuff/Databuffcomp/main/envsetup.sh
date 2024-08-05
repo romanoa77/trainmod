@@ -14,3 +14,4 @@ export RESROOT=static/
 
 
 export SERVURL=:8080
+export WCHSZ=10

@@ -80,7 +80,7 @@ func (h ConcrH) GetLogF() gin.HandlerFunc {
 
 }
 
-func (h ConcrH) PostFile(Stpt *fbufstat.Bufstat, Bch chan fbufstat.Bufstat) gin.HandlerFunc {
+func (h ConcrH) PostFile(Bch chan int) gin.HandlerFunc {
 
 	return func(ctx *gin.Context) {
 
@@ -107,10 +107,9 @@ func (h ConcrH) PostFile(Stpt *fbufstat.Bufstat, Bch chan fbufstat.Bufstat) gin.
 
 		if (err == nil) && (errb == nil) {
 
-			Stpt.UpdateSt(fgwsize)
-			Bch <- *Stpt
+			Bch <- fgwsize
 
-			simplelogger.LogWriteFile(envdef.Baselog, envdef.Strmlogn, Stpt.N_itm, fgwsize, fgwname)
+			simplelogger.LogWriteFile(envdef.Baselog, envdef.Strmlogn, 0, fgwsize, fgwname)
 
 			//Updating app status
 			//Stpt.UpdateCnt()
