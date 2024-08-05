@@ -13,4 +13,5 @@ type AbstrApp interface {
 	GetDSdsc(Table *dsstat.DSstat) gin.HandlerFunc
 	PostDsc(Table *dsstat.DSstat) gin.HandlerFunc
 	PostClean(Stpt *fbufstat.Bufstat, Table *dsstat.DSstat) gin.HandlerFunc
+	GetFLst() gin.HandlerFunc
 }

@@ -1,6 +1,7 @@
 package dsstat
 
 import (
+	"encoding/json"
 	"sync"
 )
 
@@ -64,5 +65,17 @@ func (Class *DSstat) SetTok(buf string) {
 	mu.Lock()
 	Class.Token = buf
 	mu.Unlock()
+
+}
+
+func (Class *DSstat) SetStat(buf []byte) {
+
+	var Ftable DSstat
+
+	json.Unmarshal(buf, &Ftable)
+
+	Class.Dstatus = Ftable.Dstatus
+	Class.Token = Ftable.Token
+	Class.User = Ftable.User
 
 }

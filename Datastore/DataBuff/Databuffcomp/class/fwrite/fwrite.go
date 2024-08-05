@@ -18,6 +18,10 @@ import (
 	"github.com/google/renameio"
 )
 
+type FList struct {
+	NMList []string `json:"nmlist"`
+}
+
 // If the func literal starts with an uppercase letter
 // the function will be public
 func StructToByte(buf any) []byte {

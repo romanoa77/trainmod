@@ -95,8 +95,7 @@ func (h ConcrH) PostFile(Bch chan int) gin.HandlerFunc {
 
 		//Stpt.UpdateCnt()
 
-		cTime := time.Now()
-		fgwname = "strmgw" + cTime.Format("15:04:05.000000000") + ".json"
+		fgwname = "gwb" + strconv.FormatInt(time.Now().UnixNano(), 10) + ".json"
 
 		// Call BindJSON to bind the received JSON to
 		// newAlbum.
@@ -134,10 +133,23 @@ func (h ConcrH) PostDsc(Table *dsstat.DSstat) gin.HandlerFunc {
 
 	return func(ctx *gin.Context) {
 
-		Table.SetToFrz()
+		var err error
+		var resp_code int
+		var resp any
 
-		resp_code := http.StatusCreated
-		resp := neterr.New("STAT_UPD", "Table updated")
+		Table.SetToFrz()
+		_, err = fwrite.AtmWrtJs(envdef.Baseadm, envdef.DStnm, Table)
+
+		if err == nil {
+
+			resp_code = http.StatusCreated
+			resp = neterr.New("STAT_UPD", "Table updated")
+		} else {
+			resp_code = http.StatusInternalServerError
+			resp = neterr.New(neterr.CdErrIO, neterr.BodyFIO)
+			Table.SetToOp()
+
+		}
 
 		ctx.JSON(resp_code, resp)
 
@@ -150,7 +162,7 @@ func (h ConcrH) PostClean(Stpt *fbufstat.Bufstat, Table *dsstat.DSstat) gin.Hand
 
 		var buf fbufstat.Bufstat
 		var flag bool
-		var err error
+		var err, derr error
 
 		var resp_code int
 		var resp any
@@ -192,8 +204,9 @@ func (h ConcrH) PostClean(Stpt *fbufstat.Bufstat, Table *dsstat.DSstat) gin.Hand
 		Table.Token = "databuf"
 
 		_, err = fwrite.AtmWrtJs(envdef.Baseadm, envdef.Baseadmn, buf)
+		_, derr = fwrite.AtmWrtJs(envdef.Baseadm, envdef.DStnm, Table)
 
-		if err != nil {
+		if (err != nil) || (derr != nil) {
 
 			//simplelogger.LogInf(envdef.Baselog, "infolog", "errore stato")
 
@@ -209,6 +222,38 @@ func (h ConcrH) PostClean(Stpt *fbufstat.Bufstat, Table *dsstat.DSstat) gin.Hand
 
 			resp_code = http.StatusCreated
 			resp = neterr.New("STAT_UPD", "Buffer cleaned")
+
+		}
+
+		ctx.JSON(resp_code, resp)
+
+	}
+}
+
+func (h ConcrH) GetFLst() gin.HandlerFunc {
+
+	return func(ctx *gin.Context) {
+
+		var Buf fwrite.FList
+		var resp_code int
+		var resp any
+
+		dir, err := os.ReadDir(envdef.Basedata)
+
+		if err == nil {
+
+			for _, fs := range dir {
+
+				Buf.NMList = append(Buf.NMList, fs.Name())
+			}
+
+			resp_code = http.StatusOK
+			resp = Buf
+
+		} else {
+
+			resp_code = http.StatusInternalServerError
+			resp = neterr.New(neterr.CdErrIO, neterr.BodyFIO)
 
 		}
 

@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"net/http"
 	"os"
 	"os/signal"
@@ -30,7 +31,7 @@ func main() {
 	wrtch := make(chan int, nch)
 	msgch := make(chan int)
 
-	if initstat(envdef.Baseadm, envdef.Baseadmn, StatDesc) != nil {
+	if initstat(envdef.Baseadm, envdef.Baseadmn, envdef.DStnm, StatDesc, DSDesc) != nil {
 
 		simplelogger.LogPanic("FATAL ERROR", "FS ERROR")
 
@@ -114,18 +115,25 @@ func worker(Bch chan int, Mch chan int, Stpt *fbufstat.Bufstat) {
 
 }
 
-func initstat(rtdir string, rtfname string, Buf *fbufstat.Bufstat) error {
-	var err error
-	var cbuf []byte
+func initstat(rtdir string, rtfname string, descfname string, Buf *fbufstat.Bufstat, Dsd *dsstat.DSstat) error {
+	var err, derr, initerr error
+	var cbuf, dbuf []byte
+
+	initerr = nil
 
 	cbuf, err = fwrite.UnFtoStrm(rtdir, rtfname)
+	dbuf, derr = fwrite.UnFtoStrm(rtdir, descfname)
 
-	if err == nil {
+	if (err == nil) && (derr == nil) {
 
 		Buf.SetStat(cbuf)
+		Dsd.SetStat(dbuf)
+	} else {
+
+		initerr = errors.New("FS ERR")
 	}
 
-	return err
+	return initerr
 }
 
 func PostWho(Desc *dsstat.DSstat) gin.HandlerFunc {
@@ -152,5 +160,6 @@ func initapp(SrvPt *gin.Engine, AppRts appmodel.AbstrApp, Buf *fbufstat.Bufstat,
 	SrvPt.POST("/sendF", AppRts.PostFile(Chnl))
 	SrvPt.POST("/upddsc", PostWho(Desc), AppRts.PostDsc(Desc))
 	SrvPt.POST("/cleanall", AppRts.PostClean(Buf, Desc))
+	SrvPt.GET("/dumpF", AppRts.GetFLst())
 
 }

@@ -18,6 +18,7 @@ FROM alpine:latest
 
 ENV ADMROOT=appdata/adm/
 ENV ADMFNM=StatDesc.json
+ENV DSST=Dsstat.json
 
 ENV DATAROOT=data/datavar/
 ENV DATANM=data/datavar

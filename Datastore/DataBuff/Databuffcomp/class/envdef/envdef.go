@@ -16,6 +16,8 @@ const envres = "RESROOT"
 
 const envdtrt = "DTVOLROOT"
 
+const envdsst = "DSST"
+
 // network
 const envserv = "SERVURL"
 const envch = "WCHSZ"
@@ -34,6 +36,8 @@ var Strmlogn = os.Getenv(envlogstrm)
 var Baseres = os.Getenv(envres)
 
 var Basevoldt = os.Getenv(envdtrt)
+
+var DStnm = os.Getenv(envdsst)
 
 //network
 

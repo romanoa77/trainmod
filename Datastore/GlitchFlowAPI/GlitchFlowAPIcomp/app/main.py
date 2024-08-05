@@ -36,6 +36,19 @@ async def get_ds_stats(request: Request):
     response = await requests_client.get(Appfconf.env_burl+Appfconf.env_stat)
     return response.json()
 
+
+@app.get("/desc")
+async def get_ds_desc(request: Request):
+    requests_client = request.app.requests_client
+    response = await requests_client.get(Appfconf.env_burl+Appfconf.env_desc)
+    buf= response.json()
+
+    desc=buf['dstatus']
+
+    output={"resp":desc}
+
+    return output
+
 @app.post("/train")
 async def trainsign(request: Request,msg:FrzMsg):
     requests_client = request.app.requests_client
