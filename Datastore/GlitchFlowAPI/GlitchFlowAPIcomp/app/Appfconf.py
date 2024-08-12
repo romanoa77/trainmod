@@ -17,7 +17,7 @@ env_freeze=os.environ['DS_FREEZE']
 env_burl=os.environ['DS_BURL']
 env_clean=os.environ['DS_FLUSH']
 env_desc=os.environ['DS_DESC']
-
+env_dumpbuf=os.environ['DS_DUMPF']
 env_max_size=os.environ['MAX_SIZE']
 
 

@@ -33,19 +33,25 @@ class DBhook:
     """
     def getBufStat(self):
         
-        buf_desc=self.Caller.getReq(self.status)
+        buf_desc=self.Caller.getReq(self.Urls['stat'])
 
         return buf_desc
     
     def getLogDump(self):
        
-       log_cont=self.Caller.getReq(self.log_dump)
+       log_cont=self.Caller.getReq(self.Urls['dump'])
 
        return log_cont
     
+    def getDumpF(self):
+       
+       f_cont=self.Caller.getReq(self.Urls['dumpf'])
+
+       return f_cont
+    
     def getDSDsc(self):
        
-       buf_desc=buf_desc=self.Caller.getReq(self.desc_stat)
+       buf_desc=buf_desc=self.Caller.getReq(self.Urls['desc'])
 
        return buf_desc
 
@@ -53,7 +59,7 @@ class DBhook:
 
 
         #postJson expects a dict rapresenting a json object
-        post_resp=self.Caller.postJson(self.send_data,data_struct)
+        post_resp=self.Caller.postJson(self.Urls['send'],data_struct)
 
         return post_resp
     
@@ -61,7 +67,7 @@ class DBhook:
 
 
         #postJson expects a dict rapresenting a json object
-        post_resp=self.Caller.postJson(self.updd_stat,data_struct)
+        post_resp=self.Caller.postJson(self.Urls['upddesc'],data_struct)
 
         return post_resp
     
@@ -69,43 +75,23 @@ class DBhook:
 
 
         #postJson expects a dict rapresenting a json object
-        post_resp=self.Caller.postJson(self.flush,data_struct)
+        post_resp=self.Caller.postJson(self.Urls['flush'],data_struct)
 
         return post_resp
     
 
     
 
-    def connect(self,burl,stat,dump,send,desc,upddesc,clean):
-     self.Caller=RqCalls(burl)
+    def connect(self,url_dict):
+     self.Urls=url_dict
+     self.Caller=RqCalls(self.Urls['burl'])
 
-     self.serviceurl=burl
-     self.status=stat  
-     self.log_dump=dump
-     self.send_data=send
-     self.desc_stat=desc
-     self.updd_stat=upddesc
-     self.flush=clean
+     
     
 
     
 
-"""
-DBConn=DBhook(
-   Appfconf.env_burl,Appfconf.env_stat,Appfconf.env_dump,Appfconf.env_send) 
 
-gwbuf={'h':[-1.114753991083138831e-18,-1.114753991083138831e-18],
-       't':[1.126259452401367188e+09,1.126259452401367188e+09]}
-
-output=DBConn.postDataStream(gwbuf)
-
-print(output)
-
-
-output=DBConn.getBufStat()
-
-print (output)
-"""
 
 
 

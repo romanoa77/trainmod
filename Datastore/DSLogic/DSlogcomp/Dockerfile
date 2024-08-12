@@ -14,6 +14,7 @@ ARG srvd=/var/www
 
 ENV ENDP_STAT=stat
 ENV ENDP_DUMP=dumpLogF
+ENV ENDP_DUMPF=dumpF
 ENV ENDP_SEND=sendF
 ENV DB_BURL=http://databuff-0.databuff.glitchflow.svc.cluster.local:8080/
 ENV ENDP_DESC=dstat

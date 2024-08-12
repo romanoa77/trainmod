@@ -7,6 +7,7 @@ ENV DS_FREEZE=freezeds
 ENV DS_BURL=http://dslogic.glitchflow.svc.cluster.local:5000/
 ENV DS_FLUSH=flushbuf
 ENV DS_DESC=dsdesc
+ENV DS_DUMPF=dumpF
 ENV MAX_SIZE=2000
 
 

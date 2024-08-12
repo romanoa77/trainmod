@@ -13,6 +13,8 @@ def index():
     output=DBConn.getBufStat()
     output_desc=DBConn.getDSDsc()
 
+    output_f=DBConn.getDumpF()
+
      #print(output['resp_msg'],file=sys.stderr)
 
     if (output['code']==200): 
@@ -23,7 +25,8 @@ def index():
           ,state=output_desc['resp_msg']['dstatus'],
           nitm=output['resp_msg']['n_itm'],
           user=output_desc['resp_msg']['user'],
-          token=output_desc['resp_msg']['token'])
+          token=output_desc['resp_msg']['token'],
+          files=output_f['resp_msg']['nmlist'])
     
     
     return appresp

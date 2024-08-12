@@ -1,6 +1,7 @@
 import httpx
 from . import Appfconf
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request,status
+from fastapi.responses import RedirectResponse
 from contextlib import asynccontextmanager
 from pydantic import BaseModel
 from typing import List
@@ -36,6 +37,14 @@ async def get_ds_stats(request: Request):
     response = await requests_client.get(Appfconf.env_burl+Appfconf.env_stat)
     return response.json()
 
+@app.get("/dumpbuf")
+async def get_ds_buffs(request: Request):
+    requests_client = request.app.requests_client
+    response = await requests_client.get(Appfconf.env_burl+Appfconf.env_dumpbuf)
+    return response.json()
+
+
+
 
 @app.get("/desc")
 async def get_ds_desc(request: Request):
@@ -48,6 +57,10 @@ async def get_ds_desc(request: Request):
     output={"resp":desc}
 
     return output
+
+@app.get("/dspage")
+async def redirect_ds_statpg():
+   return RedirectResponse(Appfconf.env_burl,status_code=status.HTTP_303_SEE_OTHER)
 
 @app.post("/train")
 async def trainsign(request: Request,msg:FrzMsg):

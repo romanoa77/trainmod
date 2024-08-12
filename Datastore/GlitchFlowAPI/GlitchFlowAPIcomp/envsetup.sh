@@ -21,6 +21,7 @@ export DS_FREEZE=freezeds
 export DS_BURL=http://localhost:5000/
 export DS_FLUSH=flushbuf
 export DS_DESC=dsdesc
+export DS_DUMPF=dumpf
 export MAX_SIZE=2000
 
 
