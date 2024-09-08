@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
       - name: databuff
-        image: romanoa77/databuff:alpha.k8s.1.0
+        image: romanoa77/databuff:alpha.k8s.1.2
         #command: ["sleep","infinity"]
         ports:
         - containerPort: 8080
