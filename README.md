@@ -13,10 +13,23 @@ Additional software tools for infrastructure testing are included.
 ### 6. Application Data and Filesystem
 ### 7. Endpoint Description
    
-
 ## Datastore Logic
 
+### 1. Requirements
+### 2. Configuration
+### 3. Container Setup
+### 4. Kubernetes Setup
+### 5. Commands
+### 6. Endpoint Description
+
 ## GlitchflowAPI
+
+### 1. Requirements
+### 2. Configuration
+### 3. Container Setup
+### 4. Kubernetes Setup
+### 5. Commands
+### 6. API Description
 
 ## GWclient
 
