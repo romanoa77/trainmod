@@ -6,14 +6,12 @@ Additional software tools for infrastructure testing are included.
 ## Data Buffer
 
 ### 1. Requirements
-
-Go version x
-
-3. Configuration
-4. Container Setup
-5. Kubernetes Setup
-6. Commands
-7. Application Data and Filesystem
+### 2. Configuration
+### 3. Container Setup
+### 4. Kubernetes Setup
+### 5. Commands
+### 6. Application Data and Filesystem
+### 7. Endpoint Description
    
 
 ## Datastore Logic
