@@ -14,6 +14,9 @@ Go 1.23.3 or more recent version.
 ### 2. Configuration
 Environment variables are defined inside the Dockerfile. For a local installation the envsetup.sh file can be used.
 ### 3. Container Setup
+Environment variables description.
+
+
 ### 4. Kubernetes Setup
 ### 5. Commands
 ### 6. Application Data and Filesystem
