@@ -18,19 +18,23 @@ Environment variables are defined inside the Dockerfile. For a local installatio
 Environment variables description.
 
 ADMROOT Metadata and log root directory location
+
 ADMFNM  Data descriptor file name
+
 DSST    Services descriptor file name
 
 DATAROOT Data directory location
+
 DATANM   Data root directory location(duplicate)
 
 LOGROOT  Log directory location
-LOGSTREAM Log file name
 
+LOGSTREAM Log file name
 
 SERVURL Port where the service listens for connections
 
 DTVOLROOT Data root directory location
+
 WCHSZ Internal buffer size
 
 ### 4. Kubernetes Setup
