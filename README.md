@@ -76,6 +76,9 @@ Defines a volume storing application metadata and the log file.
 Defines the volume storing gw data.
 
 ### 5. Commands
+To compile the source first install the required  go libraries, from the main directory
+
+> go mod download
 ### 6. Application Data and Filesystem
 ### 7. Endpoints Description
    
