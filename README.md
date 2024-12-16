@@ -86,7 +86,7 @@ then give the build command
 
 ### 6. Application Data and Filesystem
 
-![](https://ibb.co/180LDfF)
+![Source code](https://ibb.co/180LDfF)
 ### 7. Endpoints Description
    
 ## Datastore Logic
