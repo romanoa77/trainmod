@@ -60,6 +60,16 @@ Data root directory location
 Internal buffer size
 
 ### 4. Kubernetes Setup
+
+Several object configuration files are used: <br><br>
+
+-state.yaml
+Defines a statefulset primitive for the service.
+-adml.yaml
+Defines a volume storing application metadata and the log file.
+-gwdataln.yaml
+Defines the volume storing gw data.
+
 ### 5. Commands
 ### 6. Application Data and Filesystem
 ### 7. Endpoints Description
