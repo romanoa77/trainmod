@@ -86,7 +86,7 @@ then give the build command
 
 ### 6. Application Data and Filesystem
 
-(https://github.com/romanoa77/trainmod/main.jpg)
+(https://github.com/romanoa77/trainmod/blob/main/main.jpg)
 ### 7. Endpoints Description
    
 ## Datastore Logic
