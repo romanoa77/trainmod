@@ -65,8 +65,10 @@ Several object configuration files are used: <br><br>
 
 -state.yaml
 Defines a statefulset primitive for the service.
+
 -adml.yaml
 Defines a volume storing application metadata and the log file.
+
 -gwdataln.yaml
 Defines the volume storing gw data.
 
