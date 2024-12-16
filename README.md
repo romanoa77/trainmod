@@ -22,23 +22,32 @@ Environment variables description. <br><br>
 
 Metadata and log root directory location
 
-ADMFNM  Data descriptor file name
+>ADMFNM
+ Data descriptor file name
 
-DSST    Services descriptor file name
+>DSST
+Services descriptor file name
 
-DATAROOT Data directory location
+>DATAROOT
+Data directory location
 
-DATANM   Data root directory location(duplicate)
+>DATANM
+Data root directory location(duplicate)
 
-LOGROOT  Log directory location
+>LOGROOT
+Log directory location
 
-LOGSTREAM Log file name
+>LOGSTREAM
+Log file name
 
-SERVURL Port where the service listens for connections
+>SERVURL
+Port where the service listens for connections
 
-DTVOLROOT Data root directory location
+>DTVOLROOT
+Data root directory location
 
-WCHSZ Internal buffer size
+>WCHSZ
+Internal buffer size
 
 ### 4. Kubernetes Setup
 ### 5. Commands
