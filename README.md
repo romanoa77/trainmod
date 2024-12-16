@@ -17,6 +17,7 @@ Environment variables are defined inside the Dockerfile. For a local installatio
 ### 3. Container Setup
 Environment variables description.
 
+
 > ADMROOT
 
 Metadata and log root directory location
