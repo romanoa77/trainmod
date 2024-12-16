@@ -18,6 +18,7 @@ Environment variables are defined inside the Dockerfile. For a local installatio
 Environment variables description.
 
 > ADMROOT
+
 Metadata and log root directory location
 
 ADMFNM  Data descriptor file name
