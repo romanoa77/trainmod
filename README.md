@@ -79,6 +79,11 @@ Defines the volume storing gw data.
 To compile the source first install the required  go libraries, from the main directory
 
 > go mod download
+
+then give the build command
+
+> go build -o databuff
+
 ### 6. Application Data and Filesystem
 ### 7. Endpoints Description
    
