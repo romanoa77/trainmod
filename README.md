@@ -91,27 +91,17 @@ some language features like the struct data type and modules.
 
 ### 7. Application data
 
-.      
-  ├── application/
-
-  │   └── databuff
-  
-  ├── datavar/
-  
-  │   └── data/
-  
-  └── appdata/
-  
-     ├── adm/
-     
-     │   ├── StatDesc.json
-     
-     │   └── Dsstat.json
-     
-     └── log/
-     
-         └── LogStream.json
-
+    .
+    ├── application/
+    │   └── databuff
+    ├── datavar/
+    │   └── data/
+    └── appdata/
+        ├── adm/
+        │   ├── StatDesc.json
+        │   └── Dsstat.json
+        └── log/
+             └── LogStream.json
          
 
 
