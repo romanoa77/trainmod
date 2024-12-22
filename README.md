@@ -91,8 +91,6 @@ some language features like the struct data type and modules.
 
 ### 7. Application data
 
-![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](https://ibb.co/XLRscsL)
-<a href="https://imgbb.com/"><img src="https://i.ibb.co/T238982/photo-2024-12-22-21-54-04.jpg" alt="photo-2024-12-22-21-54-04" border="0"></a>
 
 ### 8. Endpoints Description
 
