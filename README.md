@@ -90,18 +90,18 @@ Go is similar to the C programming language so a main function is expected. The 
 some language features like the struct data type and modules.
 
 ### 7. Application data
->
-.      
-├── application/
-│   └── databuff
-├── datavar/
-│   └── data/
-└── appdata/
-    ├── adm/
-    │   ├── StatDesc.json
-    │   └── Dsstat.json
-    └── log/
-        └── LogStream.json
+
+>.      
+>├── application/
+>│   └── databuff
+>├── datavar/
+>│   └── data/
+>└── appdata/
+>    ├── adm/
+>    │   ├── StatDesc.json
+>    │   └── Dsstat.json
+>    └── log/
+>        └── LogStream.json
 
 
 ### 8. Endpoints Description
