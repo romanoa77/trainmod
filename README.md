@@ -91,9 +91,9 @@ some language features like the struct data type and modules.
 
 ### 7. Application data
 
-<a href="aaa">
+<picture>
     <img src="https://ibb.co/180LDfF" alt="Application">
-</a>
+</picture>
 
 ### 8. Endpoints Description
 
