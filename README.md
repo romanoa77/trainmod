@@ -89,7 +89,7 @@ then give the build command
 Go is similar to the C programming language so a main function is expected. The main directory contains the main function definition with the addition of copies of the application data. The class directory contains the classes definitions. Go does not provide a class data type like in C++. A program can follow the OOP paradigm using
 some language features like the struct data type and modules.
 
-### 7. Endpoints Description
+### 7. Application data
 
 ### 8. Endpoints Description
 ![Source code](https://ibb.co/180LDfF)
