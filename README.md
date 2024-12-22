@@ -92,7 +92,9 @@ some language features like the struct data type and modules.
 ### 7. Application data
 
 .
+
 ├── application/
+
 │   └── databuff
 ├── datavar/
 │   └── data/
