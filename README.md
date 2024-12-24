@@ -153,23 +153,22 @@ The service will send a list of the stored files using the JSON format.
 
 POST methods
 
->  /stat
+>  /sendF
 
-The service will send the content of the StatDesc.json file.
+This method accept a JSON file containing gw data. The received data will be stored on disk.
+
+>  /upddsc
+
+The service will update the Dsstat.json file with the content of the received JSON file. This is the the method used by the Datastore logic to freeze the Datastore.
+
+>  /cleanall
+
+This method will unfreeze the datastore. All written data will be stored inside a different directory named as "HOUR MIN DAY". The date refers to when the request has been accepted. All metadata will refers to a datastore accepting data.
 
 
 
 
 
-
-
-
-
-
-
-Metadata and log root directory location
-
-   
 ## Datastore Logic
 
 ### 1. Requirements
