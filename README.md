@@ -91,6 +91,8 @@ some language features like the struct data type and modules.
 
 ### 7. Application data
 
+Inside a container the application will have the following directory tree:
+
     .
     ├── application/
     │   └── databuff
