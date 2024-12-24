@@ -145,6 +145,20 @@ The service will send the content of the log file in the JSON format
 
 The service will send the content of the Dsstat.json file.
 
+>  /dumpF
+
+The service will send a list of the stored files using the JSON format.
+
+
+
+POST methods
+
+>  /stat
+
+The service will send the content of the StatDesc.json file.
+
+
+
 
 
 
