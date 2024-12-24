@@ -21,8 +21,8 @@ Environment variables description. <br><br>
 
 > ADMROOT
 
-Mountpoint for the kubernetes volume containing metadata 
-
+Directory containing metadata.The filepath is expected to be kubernetes mountpoint/directory
+ 
 >ADMFNM
 
  Name of the metadata file relating to the gw stored data
@@ -33,11 +33,11 @@ Name of the metadata file relating to the datastore state
 
 >DATAROOT
 
-Mountpoint for the kubernetes volume containing gw data
+Directory containing gw data. The filepath is expected to be kubernetes mountpoint/directory
 
 >DATANM
 
-Data root directory location(duplicate)
+Directory containing gw data(duplicate)
 
 >LOGROOT
 
@@ -53,7 +53,7 @@ Port where the service listens for connections
 
 >DTVOLROOT
 
-Data root directory location
+Directory containing gw data inside the volume
 
 >WCHSZ
 
