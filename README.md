@@ -125,9 +125,35 @@ Regarding the metadata:
   - token: identity token
 
 The last fileds are related to a rudimentary client identification mechanism. 
+
 For a local installation the directory tree is the same as the one inside the Databuffcomp directory.
     
 ### 8. Endpoints Description
+
+GET methods
+
+>  /stat
+
+The service will send the content of the StatDesc.json file.
+
+>  /dumpLogF
+
+
+The service will send the content of the log file in the JSON format
+
+>  /dstat
+
+The service will send the content of the Dsstat.json file.
+
+
+
+
+
+
+
+
+
+Metadata and log root directory location
 
    
 ## Datastore Logic
