@@ -110,6 +110,19 @@ Inside a container the application will have the following directory tree:
 - The data directory contains stored gw data
 - The adm directory contains metadata relating to the system
 - The log directory contains the log file
+
+Regarding the metadata:
+
+-StatDesc.json contains the following fields:
+
+  - n_itm: the number of files stored
+  - buff_size: total number of bytes written
+
+-Dsstat.json contains the following fields:
+
+  - dstatus: datastore state. If the freeze signal has been sent from an external operator. It can assume the OPERATIONAL/FROZEN values.
+  - buff: total number of bytes written
+    
          
 
 
