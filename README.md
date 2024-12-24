@@ -21,19 +21,19 @@ Environment variables description. <br><br>
 
 > ADMROOT
 
-Metadata and log root directory location
+Mountpoint for the kubernetes volume containing metadata 
 
 >ADMFNM
 
- Data descriptor file name
+ Name of the metadata file relating to the gw stored data
 
 >DSST
 
-Services descriptor file name
+Name of the metadata file relating to the datastore state
 
 >DATAROOT
 
-Data directory location
+Mountpoint for the kubernetes volume containing gw data
 
 >DATANM
 
@@ -124,7 +124,7 @@ Regarding the metadata:
   - user: client identification string
   - token: identity token
 
-The last fileds are related to a rudimentary client identification mechanism. 
+The last fields are related to a rudimentary client identification mechanism. 
 
 For a local installation the directory tree is the same as the one inside the Databuffcomp directory.
     
