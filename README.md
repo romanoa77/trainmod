@@ -104,6 +104,12 @@ Inside a container the application will have the following directory tree:
         │   └── Dsstat.json
         └── log/
              └── LogStream.json
+
+-databuff is the application executable
+-The datavar and appdata directories are mountpoints for their respective kubernetes volume
+-The data directory contains stored gw data
+-The adm directory contains metadata relating to the system
+-The log directory contains the log file
          
 
 
