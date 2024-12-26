@@ -233,8 +233,19 @@ Data Buffer url.
 
 Size of the stored gw data required for freezing the datastore.
 ### 4. Kubernetes Setup
+
+-depl.yaml
+
+Defines a deployment for the service.
 ### 5. Commands
-### 6. Endpoint Description
+
+If you want to launch the service from a local installation use the command
+
+> gunicorn -c /etc/gunicorn.conf.py app:create_app('default')
+
+### 6. Directory Description
+
+### 7. Endpoint Description
 
 ## GlitchflowAPI
 
