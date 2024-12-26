@@ -171,8 +171,24 @@ The Datastore Logic  is a web application written with python Flask. It performs
 
 ### 1. Requirements
 
-The following python packages are required:
+The following python packages are required: <br> <br>
 
+    blinker==1.7.0
+    certifi==2024.2.2
+    charset-normalizer==3.3.2
+    click==8.1.7
+    flask==3.0.3
+    idna==3.7
+    importlib-metadata==7.1.0
+    itsdangerous==2.1.2
+    Jinja2==3.1.3
+    MarkupSafe==2.1.5
+    PyYAML==6.0.1
+    requests==2.31.0
+    urllib3==2.2.1
+    werkzeug==3.0.2
+    zipp==3.18.1
+    gunicorn==22.0.0
 
 ### 2. Configuration
 ### 3. Container Setup
