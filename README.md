@@ -193,8 +193,45 @@ The following python packages are required: <br> <br>
 ### 2. Configuration
 
 Environment variables are defined inside the Dockerfile. For a local installation the envsetup.sh file can be used. In addition the gunicorn server can be configured
-using the gunicorn.conf.py file. See gunicorn documentation (https://docs.gunicorn.org/en/22.0.0/settings.html)
+using the gunicorn.conf.py file. See gunicorn documentation https://docs.gunicorn.org/en/22.0.0/settings.html .
 ### 3. Container Setup
+Environment variables description <br><br>
+
+> ENDP_STAT
+
+Name of the Data Buffer endpoint for getting the content of the StatDesc.json file.
+
+> ENDP_DUMP
+
+Name of the Data Buffer endpoint for getting the content of the log file.
+
+> ENDP_DUMPF
+
+Name of the Data Buffer endpoint for getting the list of the stored  gw data files.
+
+> ENDP_SEND
+
+Name of the Data Buffer endpoint used for sending gw data.
+
+> ENDP_DESC
+
+Name of the Data Buffer endpoint for getting the content of the Dsstat.json file.
+
+> ENDP_STAT
+
+Name of the Data Buffer endpoint for updating the content of the StatDesc.json file.
+
+> ENDP_CLEAN
+
+Name of the Data Buffer endpoint for unfreezing the datastore.
+
+> DB_BURL
+
+Data Buffer url.
+
+> MAX_SIZE
+
+Size of the stored gw data required for freezing the datastore.
 ### 4. Kubernetes Setup
 ### 5. Commands
 ### 6. Endpoint Description
