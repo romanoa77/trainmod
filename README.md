@@ -21,7 +21,7 @@ Environment variables description. <br><br>
 
 > ADMROOT
 
-Directory containing metadata.The filepath is expected to be kubernetes mountpoint/directory
+Directory containing metadata.The path is expected to be  mountpoint/directory,  mountpoint is where the kubernetes volume is mounted. 
  
 >ADMFNM
 
@@ -33,7 +33,7 @@ Name of the metadata file relating to the datastore state
 
 >DATAROOT
 
-Directory containing gw data. The filepath is expected to be kubernetes mountpoint/directory
+Directory containing gw data. The path is expected to be  mountpoint/directory
 
 >DATANM
 
@@ -57,7 +57,7 @@ Directory containing gw data inside the volume
 
 >WCHSZ
 
-Internal buffer size
+
 
 ### 4. Kubernetes Setup
 
