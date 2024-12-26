@@ -241,6 +241,10 @@ Defines a deployment for the service.
 
 If you want to launch the service from a local installation use the command
 
+> gunicorn -c /path to gunicorn.conf.py app:create_app('default')
+
+for example:
+
 > gunicorn -c /etc/gunicorn.conf.py app:create_app('default')
 
 ### 6. Directory Description
