@@ -25,39 +25,39 @@ Directory containing metadata.The path is expected to be  mountpoint/directory, 
  
 >ADMFNM
 
- Name of the metadata file relating to the gw stored data
+ Name of the metadata file relating to the gw stored data.
 
 >DSST
 
-Name of the metadata file relating to the datastore state
+Name of the metadata file relating to the datastore state.
 
 >DATAROOT
 
-Directory containing gw data. The path is expected to be  mountpoint/directory
+Directory containing gw data. The path is expected to be  mountpoint/directory.
 
 >DATANM
 
-Directory containing gw data(duplicate)
+Directory containing gw data(duplicate).
 
 >LOGROOT
 
-Log directory location
+Log directory location.
 
 >LOGSTREAM
 
-Log file name
+Log file name.
 
 >SERVURL
 
-Port where the service listens for connections
+Port where the service listens for connections.
 
 >DTVOLROOT
 
-Directory containing gw data inside the volume
+Directory containing gw data inside the volume.
 
 >WCHSZ
 
-
+Requests buffer size.
 
 ### 4. Kubernetes Setup
 
@@ -134,12 +134,12 @@ GET methods
 
 >  /stat
 
-The service will send the content of the StatDesc.json file.
+The service will send the content of the StatDesc.json file in  the JSON format.
 
 >  /dumpLogF
 
 
-The service will send the content of the log file in the JSON format
+The service will send the content of the log file in the JSON format.
 
 >  /dstat
 
@@ -163,13 +163,11 @@ The service will update the Dsstat.json file with the content of the received JS
 
 >  /cleanall
 
-This method will unfreeze the datastore. All written data will be stored inside a different directory named as "HOUR MIN DAY". The date refers to when the request has been accepted. All metadata will refers to a datastore accepting data.
-
-
-
-
+This method will unfreeze the datastore. All written data will be stored inside a different directory named as "DAY HOUR MIN", the date refers to when the request has been accepted. 
 
 ## Datastore Logic
+
+
 
 ### 1. Requirements
 ### 2. Configuration
