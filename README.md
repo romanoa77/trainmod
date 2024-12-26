@@ -167,7 +167,7 @@ This method will unfreeze the datastore. All written data will be stored inside 
 
 ## Datastore Logic
 
-The Datastore Logic  is a web application written with python Flask. It performs the datastore operations using the functionalities of the Data Buffer service.
+The Datastore Logic  is a web application written with python Flask. It performs the datastore operations using the functionalities of the Data Buffer service. The service runs inside a gunicorn server.
 
 ### 1. Requirements
 
@@ -191,6 +191,9 @@ The following python packages are required: <br> <br>
     gunicorn==22.0.0
 
 ### 2. Configuration
+
+Environment variables are defined inside the Dockerfile. For a local installation the envsetup.sh file can be used. In addition the gunicorn server can be configured
+using the gunicorn.conf.py file. See gunicorn documentation (https://docs.gunicorn.org/en/22.0.0/settings.html)
 ### 3. Container Setup
 ### 4. Kubernetes Setup
 ### 5. Commands
