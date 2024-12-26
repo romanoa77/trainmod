@@ -167,9 +167,13 @@ This method will unfreeze the datastore. All written data will be stored inside 
 
 ## Datastore Logic
 
-
+The Datastore Logic  is a web application written with python Flask. It performs the datastore operations using the functionalities of the Data Buffer service.
 
 ### 1. Requirements
+
+The following python packages are required:
+
+
 ### 2. Configuration
 ### 3. Container Setup
 ### 4. Kubernetes Setup
