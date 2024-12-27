@@ -254,7 +254,11 @@ for example:
         ├── main/
         └── static/
         └── templates/
-    
+
+- main contains methods definition for serving requests
+- static contains resources used in html pages
+- templates contains html pages
+     
 ### 7. Endpoint Description
 
 ## GlitchflowAPI
