@@ -359,6 +359,15 @@ To launch the service on a local installation use the command
 
 ### 6. API Description
 
+GET methods
+
+>stats
+
+Retrieve the content of the StatDesc.json file
+
+    {"n_itm": NUMBER OF FILES STORED, "buff_size": TOTAL SIZE OF STORED DATA}
+POST methods
+
 ## GWclient
 
 ## Preproc
