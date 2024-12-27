@@ -261,6 +261,44 @@ for example:
      
 ### 7. Endpoint Description
 
+POST methods
+
+> /flushbuf
+
+Method for cleaning datastore
+
+> /freezeds
+
+Method for freezing datastore
+
+> /stream
+
+Method for sending gw data
+
+
+GET methods
+
+> /dsdesc
+
+Method for getting the content of the Dsstat.json
+
+> /dumpflog
+
+
+Method for getting the content of the log file
+
+> /dumpf
+
+Method for getting the list of the stored gw data files
+
+> /
+
+Datastore status page
+
+> bufstat
+
+Method for getting the content of the StatDesc.json
+
 ## GlitchflowAPI
 
 ### 1. Requirements
