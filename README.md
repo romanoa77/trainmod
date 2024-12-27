@@ -249,6 +249,12 @@ for example:
 
 ### 6. Directory Description
 
+    .
+    ├── app/
+        ├── main/
+        └── static/
+        └── templates/
+    
 ### 7. Endpoint Description
 
 ## GlitchflowAPI
