@@ -300,7 +300,7 @@ Datastore status page
 Method for getting the content of the StatDesc.json
 
 ## GlitchflowAPI
-API layer of the infrastructure.
+API layer of the infrastructure. Developed using the FastAPI Python framework.
 
 ### 1. Requirements
 The following python packages are required:
@@ -311,6 +311,7 @@ The following python packages are required:
 
 ### 2. Configuration
 Environment variables are defined inside the Dockerfile. For a local installation the envsetup.sh file can be used.
+FastAPI runs upon an Uvicorn webserver, see the official documentation for more details https://fastapi.tiangolo.com/deployment/server-workers/#multiple-workers
 
 ### 3. Container Setup
 
@@ -347,7 +348,15 @@ Datastore Logic  url.
 
 Size of the stored gw data required for freezing the datastore.
 ### 4. Kubernetes Setup
+-deplapi.yaml
+
+Defines a deployment for the service.
+
 ### 5. Commands
+To launch the service on a local installation use the command
+
+> fastapi run app/main.py --port 8000
+
 ### 6. API Description
 
 ## GWclient
