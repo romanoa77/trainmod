@@ -295,15 +295,57 @@ Method for getting the list of the stored gw data files
 
 Datastore status page
 
-> bufstat
+> /bufstat
 
 Method for getting the content of the StatDesc.json
 
 ## GlitchflowAPI
+API layer of the infrastructure.
 
 ### 1. Requirements
+The following python packages are required:
+
+    fastapi==0.111.0
+    httpx==0.27.0
+    pydantic==2.7.4
+
 ### 2. Configuration
+Environment variables are defined inside the Dockerfile. For a local installation the envsetup.sh file can be used.
+
 ### 3. Container Setup
+
+> DS_STAT
+
+Name of the Datastore Logic endpoint for getting the content of the StatDesc.json file.
+
+
+> DS_DUMPF
+
+Name of the Datastore Logic for getting the list of the stored  gw data files.
+
+> DS_SEND
+
+Name of the Datastore Logic endpoint used for sending gw data.
+
+> DS_DESC
+
+Name of the Datastore Logic endpoint for getting the content of the Dsstat.json file.
+
+> DS_FREEZE
+
+Name of the Datastore Logic endpoint for freezzing the datastore.
+
+> DS_FLUSH
+
+Name of the Data Buffer endpoint for unfreezing the datastore.
+
+> DS_BURL
+
+Datastore Logic  url.
+
+> MAX_SIZE
+
+Size of the stored gw data required for freezing the datastore.
 ### 4. Kubernetes Setup
 ### 5. Commands
 ### 6. API Description
