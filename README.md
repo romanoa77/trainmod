@@ -361,13 +361,39 @@ To launch the service on a local installation use the command
 
 GET methods
 
->stats
+>/stats
 
 Retrieve the content of the StatDesc.json file
 
     {"n_itm": NUMBER OF FILES STORED, "buff_size": TOTAL SIZE OF STORED DATA}
+
+>/dumpbuf
+
+Retrieve a list of the stored gwdata files
+
+    {"nmlist":[ARRAY OF STRINGS]}
+
+>/desc
+
+Datastore status
+
+    {"resp": OPERATIONAL/FROZEN}
+
+>/dspage
+
+Datastore status page
+
 POST methods
 
+> /train
+
+Datastore freezing signal. The following JSON file is expected to be sent with the request
+
+    {"user": CLIENT ID,"token": IDENTITY TOKEN}
+
+in case of a successful response
+
+{"resp":'FROZEN',"n_f": NUMBER OF FILES STORED,"bt_wrt": TOTAL BYTE WRITTEN}
 ## GWclient
 
 ## Preproc
