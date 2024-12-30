@@ -441,9 +441,18 @@ Copy the content of the Gw client directory inside a pod. Configure the script u
 
 ### Configuration
 
-> DS_FLUSH
+> GWID
 
-Name of the Data Buffer endpoint for unfreezing the datastore.
+Gravitational waves identifier
+
+> DTCID
+
+Interferometer identifier (see gwpy documentation)
+
+> INF
+> SUP
+
+Data will be sent as an interval (INF,SUP) around the gps of the gravitational waves. 
 
 
 
