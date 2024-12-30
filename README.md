@@ -454,6 +454,14 @@ Interferometer identifier (see gwpy documentation)
 
 Data will be sent as an interval (INF,SUP) around the gps of the gravitational waves. 
 
+> SRV
+
+Url of the API for sending data.
+
+## Client
+
+A collection of shell scripts for sending requests to the datastore. They can be used like the gwclient script. 
+
 
 
 
