@@ -405,8 +405,22 @@ API for sending data. The expected timeseries is:
 
     {"h":STRAIN ARRAY,"t":[t0,dt]}
 
-    
+for a stored file the response is:
+
+    {"resp":'CREATED',"body": ADDITIONAL INFORMATION}
+
+if the datastore is frozen the response will be:
+
+    {"resp":'FROZEN',"body": ADDITIONAL INFORMATION}
+
+> /cleanbuf    
+
+API for unfreezing the datastore. The following JSON file is expected to be sent with the request   
+
+     {"msg": THE CONTENT IS NOT RELEVANT AT THE MOMENT}
 
 ## GWclient
 
-## Preproc
+
+
+
