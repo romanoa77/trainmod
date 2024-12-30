@@ -391,13 +391,21 @@ Datastore freezing signal. The following JSON file is expected to be sent with t
 
     {"user": CLIENT ID,"token": IDENTITY TOKEN}
 
-in case the required batch of data was collected
+in case the required batch of data was collected the response will be:
 
     {"resp":'FROZEN',"n_f": NUMBER OF FILES STORED,"bt_wrt": TOTAL BYTE WRITTEN}
 
 instead if the datastore is still waiting for data
 
     {"resp":'WAITING'}
+
+> /streamdata
+
+API for sending data. The expected timeseries is:
+
+    {"h":STRAIN ARRAY,"t":[t0,dt]}
+
+    
 
 ## GWclient
 
