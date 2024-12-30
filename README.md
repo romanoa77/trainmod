@@ -421,6 +421,32 @@ API for unfreezing the datastore. The following JSON file is expected to be sent
 
 ## GWclient
 
+This is a simple python script for sending data from gw public catalogues to the datastore. During platform tests it has been executed from a shell interacting with a pod. 
+It relies on the gwpy framework.
+
+### Requirements
+
+aiohttp==3.10.3
+gwosc==0.7.1
+gwpy==3.0.8
+numpy==1.24.4
+
+### Container setup 
+
+For tests the image of the pod has been my custom docker image gwpyimg:0.1.rc .
+
+### Usage 
+
+Copy the content of the Gw client directory inside a pod. Configure the script using the envsetup.sh file then execute the python script.
+
+### Configuration
+
+> DS_FLUSH
+
+Name of the Data Buffer endpoint for unfreezing the datastore.
+
+
+
 
 
 
