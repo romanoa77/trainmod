@@ -467,6 +467,7 @@ A collection of shell scripts for sending requests to the datastore. They can be
 The following API are used:
 
 >train
+
 >stats
 
 A docker image containing the preprocessing software is required.
