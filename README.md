@@ -426,10 +426,10 @@ It relies on the gwpy framework.
 
 ### Requirements
 
-aiohttp==3.10.3
-gwosc==0.7.1
-gwpy==3.0.8
-numpy==1.24.4
+    aiohttp==3.10.3
+    gwosc==0.7.1
+    gwpy==3.0.8
+    numpy==1.24.4
 
 ### Container setup 
 
@@ -456,11 +456,20 @@ Data will be sent as an interval (INF,SUP) around the gps of the gravitational w
 
 > SRV
 
-Url of the API for sending data.
+Url of the API transmitting data.
 
 ## Client
 
 A collection of shell scripts for sending requests to the datastore. They can be used like the gwclient script. 
+
+## Airflow DAG
+
+The following API are used:
+
+>train
+>stats
+
+A docker image containing the preprocessing software is required.
 
 
 
