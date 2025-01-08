@@ -155,7 +155,7 @@ POST methods
 
 >  /sendF
 
-This method accept a JSON file containing gw data. The received data will be stored on disk.
+This method accepts a JSON file containing gw data. The received data will be stored on disk.
 
 >  /upddsc
 
@@ -163,11 +163,11 @@ The service will update the Dsstat.json file with the content of the received JS
 
 >  /cleanall
 
-This method will unfreeze the datastore. All written data will be stored inside a different directory named as "DAY HOUR MIN", the date refers to when the request has been accepted. 
+This method will unfreeze the datastore. All written data will be stored inside a  directory named as "DAY HOUR MIN", the date refers to when the request has been accepted. 
 
 ## Datastore Logic
 
-The Datastore Logic  is a web application written with python Flask. It performs the datastore operations using the functionalities of the Data Buffer service. The service runs inside a gunicorn server.
+The Datastore Logic  is a web application written with  Flask. It performs the datastore operations using the functionalities of the Data Buffer service. The service runs inside a gunicorn server.
 
 ### 1. Requirements
 
