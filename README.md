@@ -2,7 +2,7 @@
 # DT Datastore Services
 
 This repository contains the source code of the services responsible for storing gravitational waves data(gw) .
-Additional software tools for infrastructure testing are included. The services has been designed to be executed inside a cluster running Kubernetes. Their Docker images can be found here:
+Additional software tools for infrastructure testing are included. The services have been designed to be executed inside a cluster running Kubernetes. Their Docker images can be found here:
 
 https://hub.docker.com/repositories/romanoa77
 
