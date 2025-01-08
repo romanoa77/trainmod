@@ -363,25 +363,25 @@ GET methods
 
 >/stats
 
-Retrieve the content of the StatDesc.json file
+Retrieve the content of the StatDesc.json file.
 
     {"n_itm": NUMBER OF FILES STORED, "buff_size": TOTAL SIZE OF STORED DATA}
 
 >/dumpbuf
 
-Retrieve a list of the stored gwdata files
+Retrieve a list of the stored gwdata files.
 
     {"nmlist":[ARRAY OF STRINGS]}
 
 >/desc
 
-Datastore status
+Datastore status.
 
     {"resp": OPERATIONAL/FROZEN}
 
 >/dspage
 
-Datastore status page
+Datastore status page.
 
 POST methods
 
@@ -443,11 +443,11 @@ Copy the content of the Gw client directory inside a pod. Configure the script u
 
 > GWID
 
-Gravitational waves identifier
+Gravitational waves identifier.
 
 > DTCID
 
-Interferometer identifier (see gwpy documentation)
+Interferometer identifier (see gwpy documentation).
 
 > INF
 > SUP
