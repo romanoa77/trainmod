@@ -120,7 +120,7 @@ Regarding the metadata:
 
 -Dsstat.json contains the following fields:
 
-  - dstatus: datastore state. If the freeze signal has been sent from an external operator. It can assume the OPERATIONAL/FROZEN values
+  - dstatus: datastore state. It can assume the OPERATIONAL/FROZEN values
   - user: client identification string
   - token: identity token
 
